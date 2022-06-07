@@ -3,6 +3,6 @@
 
 **Технологический стек:** Indicate the technological nature of the software, including primary programming language(s) and whether the software is intended as standalone or as a module in a framework or other ecosystem.
 **Статус:** Alpha, Beta, 1.1, etc. It's OK to write a sentence, too. The goal is to let interested people know where this project is at. This is also a good place to link to the CHANGELOG.
-[**Ссылка на продукт или демо-экземпляр**]()
+[**Проект**](https://github.com/TohaProger/SimpleTasks/releases/download/v1.0/default.rar)
 
 Скриншот рабочего окна приложения: If the software has visual components, place a screenshot after the description; e.g.,
