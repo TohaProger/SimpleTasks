@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<FlowPane hgap="10.0" prefHeight="475.0" prefWidth="900.0" vgap="10.0" xmlns="http://javafx.com/javafx/16"
+          xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.program.Controllers.MainController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+    <TableView fx:id="RequirementsTable" prefHeight="435.0" prefWidth="500.0">
+        <columns>
+            <TableColumn fx:id="id_Requirements" prefWidth="75.0" text="Id"/>
+            <TableColumn fx:id="Name_Requirements" prefWidth="75.0" text="Название"/>
+            <TableColumn fx:id="PriorityRequirements" text="Приоритет"/>
+            <TableColumn fx:id="VersionRequirements" prefWidth="75.0" text="Версия"/>
+            <TableColumn fx:id="StatusRequirements" prefWidth="82.0" text="Статус"/>
+            <TableColumn fx:id="AuthorRequirements" prefWidth="95.0" text="Автор"/>
+        </columns>
+    </TableView>
+    <VBox fx:id="vboxNotForGuest" alignment="TOP_CENTER" prefHeight="435.0" prefWidth="299.0" spacing="10.0">
+        <Label text="Название">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="textName"/>
+        <Label text="Приоритет">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="comboPriority" prefHeight="25.0" prefWidth="175.0"/>
+        <Label text="Версия">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="textVersion"/>
+        <Label text="Статус">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </Label>
+        <ComboBox fx:id="comboStatus" prefWidth="175.0"/>
+        <CheckBox fx:id="checkAuthor" mnemonicParsing="false" text="Изменить автора">
+            <font>
+                <Font size="14.0"/>
+            </font>
+        </CheckBox>
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+            <Button mnemonicParsing="false" onAction="#Add" text="Добавить">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#Update" text="Обновить">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+            <Button fx:id="btnDelete" mnemonicParsing="false" onAction="#Delete" text="Удалить">
+                <font>
+                    <Font size="14.0"/>
+                </font>
+            </Button>
+        </HBox>
+    </VBox>
+</FlowPane>

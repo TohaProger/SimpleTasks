@@ -1,0 +1,71 @@
+@startuml
+class com.example.program.Model.Requirements {
++ int id_Requirements
++ String priority
++ String Name
++ String Version
++ String status
++ String author
++ int getId_Requirements()
++ void setId_Requirements(int)
++ String getPriority()
++ void setPriority(String)
++ String getName()
++ void setName(String)
++ String getVersion()
++ void setVersion(String)
++ String getStatus()
++ void setStatus(String)
++ String getAuthor()
++ void setAuthor(String)
+}
+class com.example.program.Model.UserDAO {
++ void createTableUser()
++ void createTableRequirements()
++ List<Entity> getAllEntity()
++ void printAll()
++ boolean Verification(String,String)
++ void addUser(String,String)
++ Entity getDeveloper(int)
++ Users findUser(String,String)
++ Users Mapping(ResultSet)
++ Connection getConnection()
++ boolean execSQL(String)
+}
+class com.example.program.Model.Users {
+~ int id_User
+~ String login
+~ String password
++ int getId_User()
++ void setId_User(int)
++ String getLogin()
++ void setLogin(String)
++ String getPassword()
++ void setPassword(String)
++ String toString()
+}
+interface com.example.program.Model.Entity {
++ String toString()
+}
+abstract class com.example.program.Model.DAO {
+~ Connection connection
++ void createConnection()
++ List<Entity> getAllEntity()
++ Entity getDeveloper(int)
++ void updateDeveloper(Entity)
++ void deleteDeveloper(Entity)
+}
+class com.example.program.Model.RequirementsDAO {
++ ObservableList<Requirements> getRequirements()
++ Requirements MappringRequirements(ResultSet)
++ void addRequirements(String,String,String,String,String)
++ void deleteRequirements(int)
++ void updateRequirements(String,String,String,String,String,int)
+}
+
+
+com.example.program.Model.Entity <|.. com.example.program.Model.Requirements
+com.example.program.Model.DAO <|-- com.example.program.Model.UserDAO
+com.example.program.Model.Entity <|.. com.example.program.Model.Users
+com.example.program.Model.DAO <|-- com.example.program.Model.RequirementsDAO
+@enduml
