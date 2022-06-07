@@ -10,7 +10,7 @@
 **Статус:** 1.0
 
 **Скриншот рабочего окна приложения:**
-![Image alt]([https://github.com/KabaSA618/CreateSportGround/blob/main/img/Screenshot.png](https://github.com/TohaProger/SimpleTasks/blob/main/img/main.jpg)
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/main.jpg)
 
 ## Зависимости
 Язык разработки Java. 
@@ -28,11 +28,11 @@
 - Installed JDK 17+
 
 ## Приглашение к сотрудничеству
-Загрузите исходные тексты или клонируйте их с помощью команды git clone в выбранный каталог: [git clone]([https://github.com/KabaSA618/CreateSportGround.git](https://github.com/TohaProger/SimpleTasks.git) и создайте ветку (если вы птичка)
+Загрузите исходные тексты или клонируйте их с помощью команды git clone в выбранный каталог: [git clone](https://github.com/TohaProger/SimpleTasks.git) и создайте ветку (если вы птичка)
 
 ## Ссылки
-[LICENSE](LICENSE)
+[LICENSE](LICENSE)  
 [Readme.md](https://github.com/TohaProger/SimpleTasks/blob/main/README.md)
 
 ## Источники и справочники
-[Проект, который меня вдохновил: osrmt.] (https://github.com/osrmt/osrmt)
+[Проект, который меня вдохновил: osrmt.](https://github.com/osrmt/osrmt)
