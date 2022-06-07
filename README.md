@@ -31,8 +31,8 @@
 Загрузите исходные тексты или клонируйте их с помощью команды git clone в выбранный каталог: [git clone]([https://github.com/KabaSA618/CreateSportGround.git](https://github.com/TohaProger/SimpleTasks.git) и создайте ветку (если вы птичка)
 
 ## Ссылки
-[LICENSE]([https://github.com/KabaSA618/CreateSportGround/blob/main/LICENSE](https://github.com/TohaProger/SimpleTasks/blob/main/LICENSE)
-[Readme.md](https://github.com/TohaProger/SimpleTasks/blob/main/LICENSE](https://github.com/TohaProger/SimpleTasks/blob/main/README.md)
+[LICENSE](LICENSE)
+[Readme.md](https://github.com/TohaProger/SimpleTasks/blob/main/README.md)
 
 ## Источники и справочники
 [Проект, который меня вдохновил: osrmt.] (https://github.com/osrmt/osrmt)
