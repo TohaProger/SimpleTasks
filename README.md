@@ -1,8 +1,32 @@
 # SimpleTasks
-**Описание**: Поместите осмысленное, краткое и простое описание того, чего этот проект пытается достичь и почему это важно. Опишите проблемы, которые решает этот проект. Опишите, как это программное обеспечение может улучшить жизнь своей аудитории.
+**Описание:** Данное програмное обеспечение служит для управления требованиями.
 
-**Технологический стек:** Indicate the technological nature of the software, including primary programming language(s) and whether the software is intended as standalone or as a module in a framework or other ecosystem.
-**Статус:** Alpha, Beta, 1.1, etc. It's OK to write a sentence, too. The goal is to let interested people know where this project is at. This is also a good place to link to the CHANGELOG.
+* Проводник
+* Полупроводник
+* Диэлектрик
+
+**Технологический стек:** Java.
 [**Проект**](https://github.com/TohaProger/SimpleTasks/releases/download/v1.0/default.rar)
+**Статус:** 1.0
 
-Скриншот рабочего окна приложения: If the software has visual components, place a screenshot after the description; e.g.,
+**Скриншот рабочего окна приложения:**
+![Image alt](https://github.com/KabaSA618/CreateSportGround/blob/main/img/Screenshot.png)
+
+## Зависимости
+Язык разработки Java. 
+Для создания пользовательского интерфейса используется платформа JavaFX. 
+Для упрощения организации и работы с интерфейсом в JavaFX может использоваться язык разметки FXML, который создан на основе XML. FXML позволяет определить интерфейс приложения декларативным способом подобно тому, как веб-страницы определяются с помощью HTML.
+
+## Установка
+- Скачать проект
+- распаковать архив
+### Требования к предварительной установке
+- Windows, Linux or MacOS
+- Archiver (winrar, 7-Zip, etc)
+- Installed JDK 18
+
+## Приглашение к сотрудничеству
+Загрузите исходные тексты или клонируйте их с помощью команды git clone в выбранный каталог: git clone [https://github.com/KabaSA618/CreateSportGround.git](https://github.com/KabaSA618/CreateSportGround.git) и создайте ветку
+
+## Остальные ссылки
+[LICENSE](https://github.com/KabaSA618/CreateSportGround/blob/main/LICENSE)
