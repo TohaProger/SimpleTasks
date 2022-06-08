@@ -35,7 +35,6 @@ public class LoginController {
         System.out.println(PasswordText.getText());
         if (userDAO.Verification(LoginText.getText(),PasswordText.getText()))
         {
-
             main.inputUser(userDAO.findUser(LoginText.getText(),PasswordText.getText()));
             stage.hide();
             stage.setScene(scene);
@@ -60,7 +59,6 @@ public class LoginController {
 
     public void onGuest(ActionEvent actionEvent) throws IOException {
         isUserIn = false;
-
         HelloApplication.downloadScene("Main-view.fxml", actionEvent, "Только просмотр (гостевой вход)");
     }
 }
