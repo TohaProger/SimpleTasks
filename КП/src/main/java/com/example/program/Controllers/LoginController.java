@@ -15,6 +15,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.sql.SQLException;
 
+/**
+ * Класс контроллер для авторизации
+ */
 public class LoginController {
     @FXML
     private Label welcomeText;
@@ -24,8 +27,14 @@ public class LoginController {
     private TextField PasswordText;
     UserDAO userDAO = new UserDAO();
 
+    /**
+     * Функция входа как пользователь
+     * @param actionEvent событие
+     * @throws SQLException  исключение при работе с SQL-запросами
+     * @throws IOException исключение потока для чтения данных
+     */
     public void onLogin(ActionEvent actionEvent) throws SQLException, IOException {
-        userDAO.printAll();
+
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
@@ -50,13 +59,22 @@ public class LoginController {
             alert.showAndWait();
         }
     }
-
+    /**
+     * Функция для открытия окна регистрации
+     * @param actionEvent событие
+     * @throws IOException исключение потока для чтения данных
+     */
     public void onShowRegister(ActionEvent actionEvent) throws IOException {
         HelloApplication.downloadScene("register-view.fxml", actionEvent, "Страница регистрации");
     }
 
     public static boolean isUserIn = true;
 
+    /**
+     * Функция для входа как гость
+     * @param actionEvent событие
+     * @throws IOException исключение потока для чтения данных
+     */
     public void onGuest(ActionEvent actionEvent) throws IOException {
         isUserIn = false;
         HelloApplication.downloadScene("Main-view.fxml", actionEvent, "Только просмотр (гостевой вход)");

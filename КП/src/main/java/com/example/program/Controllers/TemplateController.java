@@ -13,6 +13,9 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+/**
+ * Класс контроллер для шаблона требования
+ */
 public class TemplateController implements Initializable {
 
     @FXML
@@ -29,11 +32,20 @@ public class TemplateController implements Initializable {
 
     }
 
+    /**
+     * Функция отображения введенного текста
+     * @param event событие
+     */
     public void onText(ActionEvent event) {
         System.setText(textSystem.getText());
         function.setText(textFunction.getText());
     }
 
+    /**
+     * Функция возвращения назад
+     * @param actionEvent
+     * @throws IOException исключение потока
+     */
     public void onBack(ActionEvent actionEvent) throws IOException {
         text=System.getText()+" должна "+function.getText();
         HelloApplication.downloadScene("Main-view.fxml", actionEvent, "");

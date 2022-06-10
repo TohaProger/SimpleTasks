@@ -9,8 +9,15 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Класс приложения
+ */
 public class HelloApplication extends Application {
-
+    /**
+     * Функция загрузки
+     * @param stage Stage
+     * @throws IOException чтение потока данных
+     */
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
@@ -20,6 +27,13 @@ public class HelloApplication extends Application {
         stage.show();
     }
 
+    /**
+     * Функция загрузки сцены
+     * @param str String
+     * @param actionEvent событие
+     * @param title String
+     * @throws IOException чтение потока данных
+     */
     public static void downloadScene(String str, ActionEvent actionEvent, String title) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(str));
         Scene scene = new Scene(fxmlLoader.load(), 900, 600);
@@ -31,8 +45,10 @@ public class HelloApplication extends Application {
     }
 
 
-
-
+    /**
+     * Главная функция приложения
+     * @param args String[]
+     */
     public static void main(String[] args) {
         launch();
     }

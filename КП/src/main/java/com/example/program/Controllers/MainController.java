@@ -2,6 +2,7 @@ package com.example.program.Controllers;
 
 import com.example.program.HelloApplication;
 import com.example.program.Model.*;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,15 +11,17 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import org.w3c.dom.events.MouseEvent;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.net.URL;
-import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 import java.util.UUID;
 
+/**
+ * Класс Main контроллера
+ */
 public class MainController implements Initializable {
     @FXML
     public ComboBox<String> comboType;
@@ -49,11 +52,11 @@ public class MainController implements Initializable {
     @FXML
     public ComboBox<String> comboType1;
     @FXML
-    public ComboBox<String> comboComplexity;
+    public ComboBox<ComplexityRequirement> comboComplexity;
     @FXML
-    public ComboBox<String> comboStatus;
+    public ComboBox<StatusRequirement> comboStatus;
     @FXML
-    public ComboBox<String> comboPriority;
+    public ComboBox<PriorityRequirement> comboPriority;
     @FXML
     public TextField textSource;
     @FXML
@@ -70,7 +73,9 @@ public class MainController implements Initializable {
     public GridPane grid;
     public Button btnDelete;
 
-
+    /**
+     * Конструктор
+     */
     public MainController(){
         //vboxNotForGuest.setVisible(false);
     }
@@ -79,20 +84,29 @@ public class MainController implements Initializable {
     public static Requirements requirements=new Requirements();
     public RequirementsDAO requirementsDAO = new RequirementsDAO();
 
+    /**
+     * Функция определения вошёл ли пользователь
+     * @param user пользователя
+     */
     public void inputUser(Users user) {
         this.user = user;
     }
 
-
+    /**
+     * Функция инициализации
+     * @param location URL
+     * @param resources ресурсы
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        comboType.getItems().setAll("Функциональные", "Требования к интерфейсам", "Производительность", "Ограничения",
-                "Технологические требования","Требования качества","Нефункциональные Требования эргономики");
-        comboStatus.getItems().setAll("Предложено", "Одобрено", "Утверждено", "Реализовано", "Верифицировано");
-        comboPriority.getItems().addAll("Высокий", "Средний", "Низкий");
-        comboType1.getItems().setAll("Функциональные", "Требования к интерфейсам", "Производительность", "Ограничения",
-                "Технологические требования","Требования качества","Нефункциональные Требования эргономики");
-        comboComplexity.getItems().setAll("Высокая", "Средняя","Низкая");
+        TypeRequirement[] allType = TypeRequirement.values();
+        for(TypeRequirement type : allType) {
+            comboType.getItems().add(type.toString());
+            comboType1.getItems().add(type.toString());
+        }
+        comboStatus.setItems( FXCollections.observableArrayList( StatusRequirement.values()));
+        comboPriority.getItems().addAll(PriorityRequirement.values());
+        comboComplexity.getItems().setAll(ComplexityRequirement.values());
         if(!LoginController.isUserIn) {
             vboxNotForGuest.setVisible(false);
             grid.setVisible(false);
@@ -102,6 +116,8 @@ public class MainController implements Initializable {
         try {
             tableView(requirementsDAO.getRequirements());
         } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (URISyntaxException e) {
             e.printStackTrace();
         }
         RequirementsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -116,37 +132,43 @@ public class MainController implements Initializable {
                 textReason.setText(requirements.getReason());
                 textDescription.setText(requirements.getDescription());
                 switch (requirements.getPriority()) {
-                    case "Высокий" -> comboPriority.setValue("Высокий");
-                    case "Средний" -> comboPriority.setValue("Средний");
-                    case "Низкий" -> comboPriority.setValue("Низкий");
+                    case "Высокий" -> comboPriority.setValue(PriorityRequirement.valueOf("pr1"));
+                    case "Средний" -> comboPriority.setValue(PriorityRequirement.valueOf("pr2"));
+                    case "Низкий" -> comboPriority.setValue(PriorityRequirement.valueOf("pr3"));
                 }
                 switch (requirements.getStatus()) {
-                    case "Предложено" -> comboStatus.setValue("Предложено");
-                    case "Одобрено" -> comboStatus.setValue("Одобрено");
-                    case "Утверждено" -> comboStatus.setValue("Утверждено");
-                    case "Реализовано" -> comboStatus.setValue("Реализовано");
-                    case "Верифицировано" -> comboStatus.setValue("Верифицировано");
+                    case "Предложено" -> comboStatus.setValue(StatusRequirement.valueOf("st1"));
+                    case "Одобрено" -> comboStatus.setValue(StatusRequirement.valueOf("st2"));
+                    case "Утверждено" -> comboStatus.setValue(StatusRequirement.valueOf("st3"));
+                    case "Реализовано" -> comboStatus.setValue(StatusRequirement.valueOf("st4"));
+                    case "Верифицировано" -> comboStatus.setValue(StatusRequirement.valueOf("st5"));
                 }
                 switch (requirements.getType()) {
                     case "Функциональные" -> comboType1.setValue("Функциональные");
-                    case "Требования к интерфейсам" -> comboType1.setValue("Одобрено");
+                    case "Требования к интерфейсам" -> comboType1.setValue("Требования к интерфейсам");
                     case "Производительность" -> comboType1.setValue("Производительность");
                     case "Ограничения" -> comboType1.setValue("Ограничения");
-                    case "Технологические требования" -> comboType1.setValue("Верифицировано");
+                    case "Технологические требования" -> comboType1.setValue("Технологические требования");
                     case "Требования качества" -> comboType1.setValue("Требования качества");
                     case "Требования эргономики" -> comboType1.setValue("Требования эргономики");
                     default -> comboType1.setValue("");
                 }
                 switch (requirements.getComplexity()) {
-                    case "Высокая" -> comboComplexity.setValue("Высокая");
-                    case "Средняя" -> comboComplexity.setValue("Средняя");
-                    case "Низкая" -> comboComplexity.setValue("Низкая");
+                    case "Высокая" -> comboComplexity.setValue(ComplexityRequirement.valueOf("sl1"));
+                    case "Средняя" -> comboComplexity.setValue(ComplexityRequirement.valueOf("sl2"));
+                    case "Низкая" -> comboComplexity.setValue(ComplexityRequirement.valueOf("sl3"));
                 }
             });
 
             return row;
         });
     }
+
+    /**
+     * Функция отображения в таблице
+     * @param requirements отсортированный список требований
+     * @throws SQLException
+     */
     private void tableView(ObservableList<Requirements> requirements) throws SQLException {
         RequirementsTable.setItems(requirements);
         id_Requirements.setCellValueFactory(new PropertyValueFactory<>("id_Requirements"));
@@ -162,28 +184,44 @@ public class MainController implements Initializable {
         AuthorRequirements.setCellValueFactory(new PropertyValueFactory<>("author"));
     }
 
-    public void Add(ActionEvent actionEvent) throws IOException, SQLException {
+    /**
+     * Функция добавления требования
+     * @param actionEvent событие
+     * @throws IOException исключение потока для чтения данных
+     * @throws SQLException исключение при работе с SQL-запросами
+     * @throws URISyntaxException исключение при получении URL
+     */
+    public void Add(ActionEvent actionEvent) throws IOException, SQLException, URISyntaxException {
         if(checkEmpty()) {
-            UUID uuid = UUID.randomUUID();
-            System.out.println(uuid.toString());
             String author;
             author = user.getLogin();
-
-            requirementsDAO.addRequirements("Требование", comboPriority.getSelectionModel().getSelectedItem(),
-                    comboStatus.getSelectionModel().getSelectedItem(), author, comboType1.getSelectionModel().getSelectedItem(),
-                    comboComplexity.getSelectionModel().getSelectedItem(), textSource.getText(), textReason.getText(), textDescription.getText(),
-                    textRiskAssessment.getText(), uuid.toString());
+            requirements.setNewId_Requirements();
+            requirements.setDescription(textDescription.getText());
+            requirements.setReason(textReason.getText());
+            requirements.setAuthor(author);
+            requirements.setComplexity(comboComplexity.getSelectionModel().getSelectedItem().toString());
+            requirements.setType(comboType1.getSelectionModel().getSelectedItem());
+            requirements.setName("Требование");
+            requirements.setPriority(comboPriority.getSelectionModel().getSelectedItem().toString());
+            requirements.setStatus(comboStatus.getSelectionModel().getSelectedItem().toString());
+            requirements.setSource(textSource.getText());
+            requirements.setRiskAssessment(textRiskAssessment.getText());
+            requirementsDAO.addEntity(requirements);
             tableView(requirementsDAO.getRequirements());
+            clear();
         }
     }
 
-    public void Delete() throws SQLException {
+    /**
+     * Функция удаления требования
+     * @throws SQLException исключение при работе с SQL-запросами
+     * @throws URISyntaxException исключение при получении URL
+     */
+    public void Delete() throws SQLException, URISyntaxException {
         if (RequirementsTable.getSelectionModel().getSelectedItem() != null) {
             TableView.TableViewSelectionModel<Requirements> selectionModel = RequirementsTable.getSelectionModel();
             int myIndex = RequirementsTable.getSelectionModel().getSelectedIndex();
-            String id = RequirementsTable.getSelectionModel().getSelectedItem().id_Requirements;
-            requirementsDAO.deleteRequirements(id);
-            System.out.println("id выбранной строки" + id);
+            requirementsDAO.deleteEntity(RequirementsTable.getSelectionModel().getSelectedItem());
             tableView(requirementsDAO.getRequirements());
         }
         else{
@@ -193,13 +231,21 @@ public class MainController implements Initializable {
             alert.showAndWait();
         }
     }
-
-    public void onFilter(ActionEvent event) throws SQLException {
+    /**
+     * Функция фиьтрации требования
+     * @param event событие
+     * @throws SQLException исключение при работе с SQL-запросами
+     * @throws URISyntaxException исключение при получении URL
+     */
+    public void onFilter(ActionEvent event) throws SQLException, URISyntaxException {
         tableView(requirementsDAO.getRequirementsFilterType(comboType.getSelectionModel().getSelectedItem()));
         comboType.setValue("");
     }
 
-
+    /**
+     * Функция проверки пустых полей
+     * @return результат проверки true или false
+     */
     public boolean checkEmpty(){
         if(comboType1.getSelectionModel().isEmpty()){
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -260,28 +306,69 @@ public class MainController implements Initializable {
 
         return true;
     }
-    public void onReset(ActionEvent event) throws SQLException {
+
+    /**
+     * Отчистка от фольтраии
+     * @param event событие
+     * @throws SQLException исключение при работе с SQL-запросами
+     * @throws URISyntaxException исключение при получении URL
+     */
+    public void onReset(ActionEvent event) throws SQLException, URISyntaxException {
         tableView(requirementsDAO.getRequirements());
         comboType.setValue("");
     }
 
-    public void Update(ActionEvent event) throws SQLException {
+    /**
+     * Отчистка полей ввода
+     */
+    public void clear(){
+        comboType1.setValue("");
+        comboPriority.getSelectionModel().clearSelection();
+        comboStatus.getSelectionModel().clearSelection();
+        comboComplexity.getSelectionModel().clearSelection();
+        textReason.setText("");
+        textSource.setText("");
+        textDescription.setText("");
+        textRiskAssessment.setText("");
+    }
+
+    /**
+     * Функция обновления требования
+     * @param event событие
+     * @throws SQLException исключение при работе с SQL-запросами
+     * @throws URISyntaxException исключение при получении URL
+     */
+    public void Update(ActionEvent event) throws SQLException, URISyntaxException {
         if(checkEmpty()) {
-            String id = requirements.id_Requirements;
+            String id = requirements.getId_Requirements();
             String author;
             if (checkAuthor.isSelected()) {
                 author = user.getLogin();
             } else {
                 author = requirements.getAuthor();
             }
-            requirementsDAO.updateRequirements("Требование", comboPriority.getSelectionModel().getSelectedItem(),
-                    comboStatus.getSelectionModel().getSelectedItem(), author, comboType1.getSelectionModel().getSelectedItem(),
-                    comboComplexity.getSelectionModel().getSelectedItem(), textSource.getText(), textReason.getText(), textDescription.getText(),
-                    textRiskAssessment.getText(), id);
+
+            requirements.setDescription(textDescription.getText());
+            requirements.setReason(textReason.getText());
+            requirements.setAuthor(author);
+            requirements.setComplexity(comboComplexity.getSelectionModel().getSelectedItem().toString());
+            requirements.setType(comboType1.getSelectionModel().getSelectedItem());
+            requirements.setName("Требование");
+            requirements.setPriority(comboPriority.getSelectionModel().getSelectedItem().toString());
+            requirements.setStatus(comboStatus.getSelectionModel().getSelectedItem().toString());
+            requirements.setSource(textSource.getText());
+            requirements.setRiskAssessment(textRiskAssessment.getText());
+            requirementsDAO.updateEntitys(requirements);
             tableView(requirementsDAO.getRequirements());
+            clear();
         }
     }
 
+    /**
+     * Функция от
+     * @param actionEvent событие
+     * @throws IOException исключение потока для чтения данных
+     */
     public void onTamplate(ActionEvent actionEvent) throws IOException {
         HelloApplication.downloadScene("Themplate.fxml", actionEvent, "Страница регистрации");
     }

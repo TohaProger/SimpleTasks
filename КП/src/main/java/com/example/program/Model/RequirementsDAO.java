@@ -3,16 +3,28 @@ package com.example.program.Model;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+/**
+ * Класс Dao для работы с БД
+ */
 public class RequirementsDAO extends DAO {
     public RequirementsDAO(){
 
     }
-    public ObservableList<Requirements> getRequirements() throws SQLException {
+
+    /**
+     *Функция получения всех записей
+     * @return {@link  ObservableList} список требований
+     * @throws IOException исключение потока для чтения данных
+     * @throws SQLException исключение при работе с SQL-запросами
+     */
+    public ObservableList<Requirements> getRequirements() throws SQLException, URISyntaxException {
         createConnection();
         ObservableList<Requirements> res = FXCollections.observableArrayList();
         Statement statement = connection.createStatement();
@@ -24,7 +36,15 @@ public class RequirementsDAO extends DAO {
         }
         return res;
     }
-    public ObservableList<Requirements> getRequirementsFilterType(String type) throws SQLException {
+
+    /**
+     * Функция фильтрации
+     * @param type выбранный тип  требований
+     * @return {@link  ObservableList} список требований
+     * @throws SQLException  исключение при работе с SQL-запросами
+     * @throws URISyntaxException исключение при получении URL
+     */
+    public ObservableList<Requirements> getRequirementsFilterType(String type) throws SQLException, URISyntaxException {
         createConnection();
         ObservableList<Requirements> res = FXCollections.observableArrayList();
         Statement statement = connection.createStatement();
@@ -36,64 +56,86 @@ public class RequirementsDAO extends DAO {
         }
         return res;
     }
-    public Requirements MappringRequirements(ResultSet result) throws SQLException{
+
+    /**
+     * Маппинг результата апроса
+     * @param result результирующий список
+     * @return требование
+     * @throws SQLException исключение при работе с SQL-запросами
+     * @throws URISyntaxException исключение при получении URL
+     */
+    public Requirements MappringRequirements(ResultSet result) throws SQLException, URISyntaxException {
         Requirements requirements = new Requirements();
-        System.out.println("id = "+result.getString(1));
-        requirements.setId_Requirements(result.getString(1));
+        requirements.setId_Requirements(result.getString("Requirements_ID"));
         requirements.setName(result.getString("Name"));
-        System.out.println("Name = "+requirements.getName());
         requirements.setPriority(result.getString("Priority"));
-        System.out.println("Priority = "+requirements.getPriority());
         requirements.setStatus(result.getString("Status"));
-        System.out.println("Status = "+requirements.getPriority());
-        requirements.setAuthor(result.getString("Author"));
+        requirements.setAuthor(result.getString("Author").trim());
         requirements.setComplexity(result.getString("Complexity"));
-        System.out.println("Complexity = "+requirements.getComplexity());
         requirements.setType(result.getString("Type"));
-        System.out.println("Type = "+requirements.getType());
         requirements.setSource(result.getString("Source"));
         requirements.setReason(result.getString("Reason"));
         requirements.setDescription(result.getString("Description"));
         requirements.setRiskAssessment(result.getString("RiskAssessment"));
         return requirements;
     }
-    public void addRequirements(String Name, String Priority, String Status, String Author, String Type, String Complexity,
-                                String Source, String Reason, String Description, String RiskAssessment, String Requirements_ID) throws SQLException {
+
+    /**
+     * Функция добавления записи
+     * @param requirement
+     * @throws SQLException
+     */
+    public void addEntity(Entity requirement) throws SQLException {
+        Requirements requirements = (Requirements) requirement;
         PreparedStatement insert  = connection.prepareStatement("insert into Requirements (Name,Priority,Status,Author,Complexity,Source,Reason,Description,RiskAssessment,Type,Requirements_ID)" +
                 "values(?,?,?,?,?,?,?,?,?,?,?)");
-        insert.setString(1,Name);
-        insert.setString(2,Priority);
-        insert.setString(3,Status);
-        insert.setString(4,Author);
-        insert.setString(5,Complexity);
-        insert.setString(6,Source);
-        insert.setString(7,Reason);
-        insert.setString(8,Description);
-        insert.setString(9,RiskAssessment);
-        insert.setString(10,Type);
-        insert.setString(11,Requirements_ID);
+        insert.setString(1,requirements.getName());
+        insert.setString(2,requirements.getPriority());
+        insert.setString(3,requirements.getStatus());
+        insert.setString(4,requirements.getAuthor());
+        insert.setString(5,requirements.getType());
+        insert.setString(6,requirements.getComplexity());
+        insert.setString(7,requirements.getSource());
+        insert.setString(8,requirements.getReason());
+        insert.setString(9,requirements.getDescription());
+        insert.setString(10,requirements.getRiskAssessment());
+        insert.setString(11, requirements.getId_Requirements());
         insert.executeUpdate();
     }
-    public void deleteRequirements(String id) throws SQLException {
+
+    /**
+     * Функция удаления записи
+     * @param requirement сущность
+     * @throws SQLException исключение при работе с SQL-запросами
+     */
+    public void deleteEntity(Entity requirement) throws SQLException {
+        Requirements requirements=(Requirements) requirement;
         PreparedStatement insert  = connection.prepareStatement("delete from Requirements where Requirements_ID = ?");
-        insert.setString(1, id);
+        insert.setString(1, requirements.getId_Requirements());
         insert.executeUpdate();
     }
-    public void updateRequirements(String Name, String Priority, String Status, String Author, String Type, String Complexity,
-                                   String Source, String Reason, String Description, String RiskAssessment, String Requirements_ID) throws SQLException {
+
+    /**
+     * Функция обнавления записи
+     * @param requirement сущность
+     * @throws SQLException исключение при работе с SQL-запросами
+     */
+    public void updateEntitys(Entity requirement) throws SQLException {
+        Requirements requirements = (Requirements)requirement;
         PreparedStatement insert  = connection.prepareStatement("update Requirements set Name = ?,Priority = ?, Status = ?, Author=?, Type=?," +
                 "Complexity=?, Source=?, Reason=?,Description=?,RiskAssessment=?  where Requirements_ID = ?");
-        insert.setString(1,Name);
-        insert.setString(2,Priority);
-        insert.setString(3,Status);
-        insert.setString(4,Author);
-        insert.setString(5,Type);
-        insert.setString(6,Complexity);
-        insert.setString(7,Source);
-        insert.setString(8,Reason);
-        insert.setString(9,Description);
-        insert.setString(10,RiskAssessment);
-        insert.setString(11, Requirements_ID);
+        insert.setString(1,requirements.getName());
+        insert.setString(2,requirements.getPriority());
+        insert.setString(3,requirements.getStatus());
+        insert.setString(4,requirements.getAuthor());
+        insert.setString(5,requirements.getType());
+        insert.setString(6,requirements.getComplexity());
+        insert.setString(7,requirements.getSource());
+        insert.setString(8,requirements.getReason());
+        insert.setString(9,requirements.getDescription());
+        insert.setString(10,requirements.getRiskAssessment());
+        insert.setString(11, requirements.getId_Requirements());
         insert.executeUpdate();
+
     }
 }

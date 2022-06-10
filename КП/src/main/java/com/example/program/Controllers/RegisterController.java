@@ -11,15 +11,29 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Objects;
 
+/**
+ * Класс-контроллер для регистрации
+ */
 public class RegisterController {
     UserDAO sqLiteDAO = new UserDAO();
+    /**
+     * Конструктор
+     */
     public  RegisterController(){
 
     }
+
     @FXML
     private TextField newLogin;
     @FXML
     private TextField newPassword;
+
+    /**
+     * Функция регистрации нового пользователя
+     * @param actionEvent событие
+     * @throws SQLException  исключение при работе с SQL-запросами
+     * @throws IOException исключение потока для чтения данных
+     */
     public void onRegister(ActionEvent actionEvent) throws SQLException, IOException {
 //        sqLiteDAO.createDB();
         if (!Objects.equals(newLogin.getText(), "") && !Objects.equals(newPassword.getText(), ""))
@@ -41,6 +55,12 @@ public class RegisterController {
 
     }
 
+    /**
+     * Функция перехода на страницу авторизации
+     * @param actionEvent событие
+     * @throws SQLException  исключение при работе с SQL-запросами
+     * @throws IOException исключение потока
+     */
     public void onShowLogin(ActionEvent actionEvent) throws IOException, SQLException {
         HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа");
     }
