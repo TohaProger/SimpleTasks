@@ -1,0 +1,48 @@
+@startuml
+class com.example.program.Controllers.MainController {
++ TableView<Requirements> RequirementsTable
++ TableColumn<Requirements,Integer> id_Requirements
++ TableColumn<Requirements,String> Name_Requirements
++ TableColumn<Requirements,String> PriorityRequirements
++ TableColumn<Requirements,String> VersionRequirements
++ TableColumn<Requirements,String> StatusRequirements
++ TableColumn<Requirements,String> AuthorRequirements
++ ComboBox<String> comboStatus
++ ComboBox<String> comboPriority
++ TextField textName
++ TextField textVersion
++ CheckBox checkAuthor
++ VBox vboxNotForGuest
++ Button btnDelete
+~ Users user
+~ Requirements requirements
+~ RequirementsDAO requirementsDAO
++ void inputUser(Users)
++ void initialize(URL,ResourceBundle)
+- void tableView()
++ void clear()
++ void Add()
++ void Delete()
++ void Update()
+}
+class com.example.program.Controllers.LoginController {
+- Label welcomeText
+- TextField LoginText
+- TextField PasswordText
+~ UserDAO userDAO
++ {static} boolean isUserIn
++ void onLogin(ActionEvent)
++ void onShowRegister(ActionEvent)
++ void onGuest(ActionEvent)
+}
+class com.example.program.Controllers.RegisterController {
+~ UserDAO sqLiteDAO
+- TextField newLogin
+- TextField newPassword
++ void onRegister(ActionEvent)
++ void onShowLogin(ActionEvent)
+}
+
+
+javafx.fxml.Initializable <|.. com.example.program.Controllers.MainController
+@enduml
