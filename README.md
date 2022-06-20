@@ -7,9 +7,16 @@
 
 **Технологический стек:** Java.
 [**Проект**](https://github.com/TohaProger/SimpleTasks/releases/download/v1.0/default.rar)
-**Статус:** 1.0
+**Статус:** 3.99
 
 **Скриншот рабочего окна приложения:**
+После запуска программы пользователя встречает окно входа\регистрации
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/login.jpg)
+
+Далее, после регистрации\входа, пользователь попадает в окно выбора проектов
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/projects.jpg)
+
+После выбора проекта пользователь может управлять требованиями
 ![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/main.jpg)
 
 ## Зависимости
