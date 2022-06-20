@@ -210,7 +210,8 @@ public class MainController implements Initializable {
             requirements.setReason(textReason.getText());
             requirements.setAuthor(author);
             requirements.setComplexity(comboComplexity.getSelectionModel().getSelectedItem().toString());
-            requirements.setType(comboType1.getSelectionModel().getSelectedItem());
+            System.out.println("comboType1="+comboType1.getSelectionModel().getSelectedItem());
+            requirements.setType(comboType1.getSelectionModel().getSelectedItem().toString());
             requirements.setName("Требование");
             requirements.setPriority(comboPriority.getSelectionModel().getSelectedItem().toString());
             requirements.setStatus(comboStatus.getSelectionModel().getSelectedItem().toString());

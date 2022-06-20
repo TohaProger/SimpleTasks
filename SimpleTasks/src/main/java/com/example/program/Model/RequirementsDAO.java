@@ -88,7 +88,8 @@ public class RequirementsDAO extends DAO {
      */
     public void addEntity(Entity requirement) throws SQLException {
         Requirements requirements = (Requirements) requirement;
-        PreparedStatement insert  = connection.prepareStatement("insert into Requirements (Name,Priority,Status,Author,Complexity,Source,Reason,Description,RiskAssessment,Type,Requirements_ID,Project)" +
+        PreparedStatement insert  = connection.prepareStatement("insert into Requirements (Name,Priority,Status," +
+                "Author,Type,Complexity,Source,Reason,Description,RiskAssessment,Requirements_ID,Project)" +
                 "values(?,?,?,?,?,?,?,?,?,?,?,?)");
         insert.setString(1,requirements.getName());
         insert.setString(2,requirements.getPriority());
@@ -123,8 +124,9 @@ public class RequirementsDAO extends DAO {
      */
     public void updateEntitys(Entity requirement) throws SQLException {
         Requirements requirements = (Requirements)requirement;
-        PreparedStatement insert  = connection.prepareStatement("update Requirements set Name = ?,Priority = ?, Status = ?, Author=?, Type=?," +
-                "Complexity=?, Source=?, Reason=?,Description=?,RiskAssessment=?  where Requirements_ID = ?");
+        PreparedStatement insert  = connection.prepareStatement("update Requirements set Name = ?, Priority = ?, " +
+                "Status = ?, Author=?, Type=?, " +
+                "Complexity=?, Source=?, Reason=?, Description=?, RiskAssessment=?  where Requirements_ID = ?");
         insert.setString(1,requirements.getName());
         insert.setString(2,requirements.getPriority());
         insert.setString(3,requirements.getStatus());
