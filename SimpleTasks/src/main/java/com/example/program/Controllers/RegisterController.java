@@ -1,7 +1,7 @@
 package com.example.program.Controllers;
 
 import com.example.program.HelloApplication;
-import com.example.program.Model.UserDAO;
+import com.example.program.DAO.UserDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -15,7 +15,7 @@ import java.util.Objects;
  * Класс-контроллер для регистрации
  */
 public class RegisterController {
-    UserDAO sqLiteDAO = new UserDAO();
+    //UserDAO sqLiteDAO = new UserDAO();
     /**
      * Конструктор
      */
@@ -35,15 +35,15 @@ public class RegisterController {
      * @throws IOException исключение потока для чтения данных
      */
     public void onRegister(ActionEvent actionEvent) throws SQLException, IOException {
-//        sqLiteDAO.createDB();
+
         if (!Objects.equals(newLogin.getText(), "") && !Objects.equals(newPassword.getText(), ""))
         {
-            sqLiteDAO.addUser(newLogin.getText(),newPassword.getText());
+            HomeViewController.daoFactory.getUserDAO().addUser(newLogin.getText(),newPassword.getText());
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Вы успешно зарегистрированы");
             alert.setContentText("Открываем страницу входа");
             alert.showAndWait();
-            HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа");
+            HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа", 900, 600);
         }
         else
         {
@@ -62,6 +62,6 @@ public class RegisterController {
      * @throws IOException исключение потока
      */
     public void onShowLogin(ActionEvent actionEvent) throws IOException, SQLException {
-        HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа");
+        HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа", 900, 600);
     }
 }

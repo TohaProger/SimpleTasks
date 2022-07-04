@@ -6,12 +6,12 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
+import com.example.program.DAO.ProjectDAO;
 import com.example.program.HelloApplication;
 import com.example.program.Model.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableRow;
@@ -38,13 +38,13 @@ public class ProjectController {
 
     @FXML
     private TableColumn<Project, String> DescriptionProject;
-    ProjectDAO projectDAO;
+//    ProjectDAO projectDAO;
     public static Project project;
     @FXML
-    void initialize() throws SQLException, URISyntaxException {
+    void initialize() throws SQLException, URISyntaxException, IOException {
         project=new Project();
-        projectDAO=new ProjectDAO();
-        ProjectsTable.setItems(projectDAO.getProject());
+        project.Print();
+        ProjectsTable.setItems(HomeViewController.daoFactory.getProjectDAO().getProject());
         ID_project.setCellValueFactory(new PropertyValueFactory<>("ID_project"));
         project_name.setCellValueFactory(new PropertyValueFactory<>("project_name"));
         DescriptionProject.setCellValueFactory(new PropertyValueFactory<>("Description"));

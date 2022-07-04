@@ -1,6 +1,6 @@
 package com.example.program.Model;
 
-public class Users implements Entity {
+public class Users {
     int id_User;
     /**
      * Функия возвращает id_User
@@ -52,21 +52,7 @@ public class Users implements Entity {
         return "User "+id_User+" login="+login+" passsword="+password;
     }
 
-    @Override
-    public void PrintEntity() {
-        System.out.println(this.toString());
-    }
-    /**
-     * функция проверки пустой ли пользователь
-     * @return результат
-     */
-    @Override
-    public boolean isEmpty() {
-        if(id_User==0){
-            return true;
-        }
-        return false;
-    }
+
 
     String login;
     String password;

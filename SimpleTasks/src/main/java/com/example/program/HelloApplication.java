@@ -20,8 +20,8 @@ public class HelloApplication extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("login-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("Home-View.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 300, 300);
         stage.setTitle("");
         stage.setScene(scene);
         stage.show();
@@ -34,9 +34,9 @@ public class HelloApplication extends Application {
      * @param title String
      * @throws IOException чтение потока данных
      */
-    public static void downloadScene(String str, ActionEvent actionEvent, String title) throws IOException {
+    public static void downloadScene(String str, ActionEvent actionEvent, String title, int v, int v1) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource(str));
-        Scene scene = new Scene(fxmlLoader.load(), 900, 600);
+        Scene scene = new Scene(fxmlLoader.load(), v, v1);
         Stage stage = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         stage.setTitle(title);
         stage.close();

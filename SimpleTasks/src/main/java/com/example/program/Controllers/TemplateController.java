@@ -1,7 +1,7 @@
 package com.example.program.Controllers;
 
 import com.example.program.HelloApplication;
-import com.example.program.Model.RequirementsDAO;
+import com.example.program.DAO.RequirementsDAO;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,9 +11,10 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
-import java.util.UUID;
 
 import static com.example.program.Controllers.MainController.requirements;
+
+//import static com.example.program.Controllers.MainController.requirements;
 
 /**
  * Класс контроллер для шаблона требования
@@ -41,10 +42,10 @@ public class TemplateController implements Initializable {
     @FXML
     public TextField textEfficiency;
     public static String text;
-    RequirementsDAO requirementsDAO;
+//    RequirementsDAO requirementsDAO;
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        requirementsDAO=new RequirementsDAO();
+//        requirementsDAO=new RequirementsDAO();
     }
 
     /**
@@ -61,21 +62,20 @@ public class TemplateController implements Initializable {
 
     /**
      * Функция возвращения назад
-     * @param actionEvent
      * @throws IOException исключение потока
      */
     public void onBack(ActionEvent actionEvent) throws IOException, SQLException {
         text=System.getText()+" должна "+function.getText()+" "+textObject.getText()+" каждые "+textEfficiency.getText()+" "+textUnit.getText();
         if((!requirements.id_Requirements.toString().isEmpty())){
             requirements.setTemplate(TemplateController.text);
-            requirementsDAO.updateTemplateEntitys(requirements);
+            HomeViewController.daoFactory.getRequirementsDAO().updateTemplateEntitys(requirements);
         }else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Ошибка");
             alert.setContentText("Выберете  требование");
             alert.showAndWait();
         }
-        HelloApplication.downloadScene("Main-view.fxml", actionEvent, "");
+        HelloApplication.downloadScene("Main-view.fxml", actionEvent, "", 1486, 475);
         
     }
 }

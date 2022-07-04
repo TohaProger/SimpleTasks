@@ -2,21 +2,22 @@ package com.example.program.Controllers;
 
 import com.example.program.HelloApplication;
 import com.example.program.Model.*;
+import com.example.program.Repository.ComplexityRequirement;
+import com.example.program.Repository.PriorityRequirement;
+import com.example.program.Repository.StatusRequirement;
+import com.example.program.Repository.TypeRequirement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -80,6 +81,7 @@ public class MainController implements Initializable {
     public VBox vboxNotForGuest;
     @FXML
     public GridPane grid;
+    public Users user;
     public Button btnDelete;
     public static String url;
     /**
@@ -89,23 +91,21 @@ public class MainController implements Initializable {
         //vboxNotForGuest.setVisible(false);
     }
 
-    public static Users user = new Users();
+
     public static Requirements requirements=new Requirements();
-    public RequirementsDAO requirementsDAO = new RequirementsDAO();
 
-    /**
-     * Функция определения вошёл ли пользователь
-     * @param user пользователя
-     */
-    public void inputUser(Users user) {
-        this.user = user;
-    }
+//
+//    /**
+//     * Функция определения вошёл ли пользователь
+//     * @param user пользователя
+//     */
 
-    /**
-     * Функция инициализации
-     * @param location URL
-     * @param resources ресурсы
-     */
+//
+//    /**
+//     * Функция инициализации
+//     * @param location URL
+//     * @param resources ресурсы
+//     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         TypeRequirement[] allType = TypeRequirement.values();
@@ -123,10 +123,12 @@ public class MainController implements Initializable {
         UUID uuid = UUID.randomUUID();
         System.out.println(uuid.toString());
         try {
-            tableView(requirementsDAO.getRequirements(ProjectController.project.getID_project()));
+            tableView(HomeViewController.daoFactory.getRequirementsDAO().getRequirements(ProjectController.project.getID_project()));
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (URISyntaxException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
         RequirementsTable.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
@@ -203,12 +205,12 @@ public class MainController implements Initializable {
      */
     public void Add(ActionEvent actionEvent) throws IOException, SQLException, URISyntaxException {
         if(checkEmpty()) {
-            String author;
-            author = user.getLogin();
+//            String author;
+//            author = LoginController.user;
             requirements.setNewId_Requirements();
             requirements.setDescription(textDescription.getText());
             requirements.setReason(textReason.getText());
-            requirements.setAuthor(author);
+            requirements.setAuthor(LoginController.user);
             requirements.setComplexity(comboComplexity.getSelectionModel().getSelectedItem().toString());
             System.out.println("comboType1="+comboType1.getSelectionModel().getSelectedItem());
             requirements.setType(comboType1.getSelectionModel().getSelectedItem().toString());
@@ -218,8 +220,8 @@ public class MainController implements Initializable {
             requirements.setSource(textSource.getText());
             requirements.setProject(Integer.toString(ProjectController.project.getID_project()));
             requirements.setRiskAssessment(textRiskAssessment.getText());
-            requirementsDAO.addEntity(requirements);
-            tableView(requirementsDAO.getRequirements(ProjectController.project.getID_project()));
+            HomeViewController.daoFactory.getRequirementsDAO().addEntity(requirements);
+            tableView(HomeViewController.daoFactory.getRequirementsDAO().getRequirements(ProjectController.project.getID_project()));
             clear();
         }
     }
@@ -229,12 +231,12 @@ public class MainController implements Initializable {
      * @throws SQLException исключение при работе с SQL-запросами
      * @throws URISyntaxException исключение при получении URL
      */
-    public void Delete() throws SQLException, URISyntaxException {
+    public void Delete() throws SQLException, URISyntaxException, IOException {
         if (RequirementsTable.getSelectionModel().getSelectedItem() != null) {
             TableView.TableViewSelectionModel<Requirements> selectionModel = RequirementsTable.getSelectionModel();
             int myIndex = RequirementsTable.getSelectionModel().getSelectedIndex();
-            requirementsDAO.deleteEntity(RequirementsTable.getSelectionModel().getSelectedItem());
-            tableView(requirementsDAO.getRequirements(ProjectController.project.getID_project()));
+            HomeViewController.daoFactory.getRequirementsDAO().deleteEntity(RequirementsTable.getSelectionModel().getSelectedItem());
+            tableView(HomeViewController.daoFactory.getRequirementsDAO().getRequirements(ProjectController.project.getID_project()));
         }
         else{
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -250,7 +252,7 @@ public class MainController implements Initializable {
      * @throws URISyntaxException исключение при получении URL
      */
     public void onFilter(ActionEvent event) throws SQLException, URISyntaxException {
-        tableView(requirementsDAO.getRequirementsFilterType(comboType.getSelectionModel().getSelectedItem()));
+        tableView(HomeViewController.daoFactory.getRequirementsDAO().getRequirementsFilterType(comboType.getSelectionModel().getSelectedItem()));
         comboType.setValue("");
     }
 
@@ -325,9 +327,10 @@ public class MainController implements Initializable {
      * @throws SQLException исключение при работе с SQL-запросами
      * @throws URISyntaxException исключение при получении URL
      */
-    public void onReset(ActionEvent event) throws SQLException, URISyntaxException {
-        tableView(requirementsDAO.getRequirements(ProjectController.project.getID_project()));
+    public void onReset(ActionEvent event) throws SQLException, URISyntaxException, IOException {
+        tableView(HomeViewController.daoFactory.getRequirementsDAO().getRequirements(ProjectController.project.getID_project()));
         comboType.setValue("");
+        clear();
     }
 
     /**
@@ -350,14 +353,14 @@ public class MainController implements Initializable {
      * @throws SQLException исключение при работе с SQL-запросами
      * @throws URISyntaxException исключение при получении URL
      */
-    public void Update(ActionEvent event) throws SQLException, URISyntaxException {
+    public void Update(ActionEvent event) throws SQLException, URISyntaxException, IOException {
         if(checkEmpty()) {
             String id = requirements.getId_Requirements();
-            String author;
+            Users author;
             if (checkAuthor.isSelected()) {
-                author = user.getLogin();
+                author = LoginController.user;
             } else {
-                author = requirements.getAuthor();
+                author = requirements.author;
             }
 
             requirements.setDescription(textDescription.getText());
@@ -370,8 +373,8 @@ public class MainController implements Initializable {
             requirements.setStatus(comboStatus.getSelectionModel().getSelectedItem().toString());
             requirements.setSource(textSource.getText());
             requirements.setRiskAssessment(textRiskAssessment.getText());
-            requirementsDAO.updateEntitys(requirements);
-            tableView(requirementsDAO.getRequirements(ProjectController.project.getID_project()));
+            HomeViewController.daoFactory.getRequirementsDAO().updateEntitys(requirements);
+            tableView(HomeViewController.daoFactory.getRequirementsDAO().getRequirements(ProjectController.project.getID_project()));
             clear();
         }
     }
@@ -382,7 +385,7 @@ public class MainController implements Initializable {
      * @throws IOException исключение потока для чтения данных
      */
     public void onTamplate(ActionEvent actionEvent) throws IOException, SQLException {
-        HelloApplication.downloadScene("Themplate.fxml", actionEvent, "Страница шаблона");
+        HelloApplication.downloadScene("Themplate.fxml", actionEvent, "Страница шаблона", 900, 600);
     }
 
     public void selectSourceTab(MouseEvent mouseEvent) throws IOException {

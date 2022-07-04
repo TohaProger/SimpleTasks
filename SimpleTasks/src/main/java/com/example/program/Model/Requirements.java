@@ -1,5 +1,10 @@
 package com.example.program.Model;
 
+import com.example.program.Controllers.HomeViewController;
+import com.example.program.DAO.DAOFactory;
+import com.example.program.DAO.UserDAO;
+
+import java.io.Serializable;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.SQLException;
@@ -8,7 +13,7 @@ import java.util.UUID;
 /**
  * Класс требования
  */
-public class Requirements implements Entity {
+public class Requirements implements Serializable {
     /**
      * Id Требования UUID
      */
@@ -25,6 +30,22 @@ public class Requirements implements Entity {
     public Users author;
     public String Project;
     public String Template;
+    @Override
+    public  boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof Requirements)) {
+            return false;
+        }
+        return false;
+    }
+    public Requirements(){
+        author = new Users();
+    }
     /**
      * Функия возвращает id_Requirements
      * @return id_Requirements
@@ -129,9 +150,12 @@ public class Requirements implements Entity {
      * @throws SQLException исключение при работе с SQL-запросами
      */
     public void setAuthor(String author) throws SQLException {
-        UserDAO userDAO = new UserDAO();
-        this.author = userDAO.findUser(author);;
+        this.author=HomeViewController.daoFactory.getUserDAO().findUser(author);
     }
+    public void setAuthor(Users author) throws SQLException {
+        this.author=author;
+    }
+
     /**
      * Функия возвращает шаблон требования
      * @return
@@ -236,7 +260,6 @@ public class Requirements implements Entity {
     public String getRiskAssessment() {
         return RiskAssessment;
     }
-    @Override
     public void PrintEntity() {
         System.out.println(this.toString());
     }
@@ -245,12 +268,12 @@ public class Requirements implements Entity {
      * функция проверки пустой ли требование
      * @return результат
      */
-    @Override
     public boolean isEmpty() {
-        if(this.id_Requirements.toString()!=null || this.author.toString()!=null){
-            return true;
+        if(this.id_Requirements.toString()!=null || this.author.toString()!=null
+            || this.Name!=null || this.Complexity!=null){
+            return false;
         }
-        return false;
+        return true;
     }
 
     public void setRiskAssessment(String riskAssessment) {

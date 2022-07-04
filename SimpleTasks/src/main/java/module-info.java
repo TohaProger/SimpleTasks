@@ -16,4 +16,8 @@ module com.example.program {
     exports com.example.program.Model;
     exports com.example.program.Controllers;
     opens com.example.program.Controllers to javafx.fxml;
+    exports com.example.program.DAO;
+    opens com.example.program.DAO to javafx.fxml;
+    exports com.example.program.Repository;
+    opens com.example.program.Repository to javafx.fxml;
 }
