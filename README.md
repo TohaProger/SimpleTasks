@@ -7,28 +7,32 @@
 
 **Скриншоты рабочих окон приложения:**
 После запуска программы пользователя встречает окно выбора варианта запуска - загрузка информации из базы данных или из файла
-![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/login.jpg)
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/1_start.jpg)
 
 После этого пользователю необходимо ввести свои логин и прооль для входа, или же зарегистрироваться в системе. Либо можно войти без регистрации с возможностью лишь просматривать проекты и информацию в них
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/2_login.jpg)
 
 Далее после регистрации\входа пользователь попадает в окно выбора проектов
-![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/projects.jpg)
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/3_projects)
 
 После выбора проекта пользователь попадает в главное меню проекта
-![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/main.jpg)
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/4_main.jpg)
 
 Из основного меню пользователь может различными способами управлять требованиями:
 * Просматривать документы из источников, перейдя по ссылке
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/5_1_open_document.jpg)
 
 * Изменять параментры требования
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/5_2_action.jpg)
 
 * Добавлять новое требование с заданными параметрами
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/5_4_add.jpg)
 
 * И фильтровать требования по критериям
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/5_5_filters.jpg)
 
 Также в программе предусмотрен запуск тестирования
-
-
+![Image alt](https://github.com/TohaProger/SimpleTasks/blob/main/img/6_testproject.jpg)
 
 ## Зависимости
 Язык разработки Java. 
@@ -37,10 +41,10 @@
 
 ## Установка
 - Скачать проект
-- распаковать архив
+- Распаковать архив
 - Добваить папку проекта в среду разработки (например Intellij Idea или Eclipse)
 
-### Требования к предварительной установке
+## Требования к предварительной установке
 - Windows 10+, Linux or MacOS 11+
 - Archiver (inrar или 7-zip)
 - Installed JDK 17+
