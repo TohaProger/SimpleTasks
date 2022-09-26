@@ -2,7 +2,7 @@
 **Описание:** Данное програмное обеспечение служит для управления требованиями.
 
 * **Технологический стек:** Java.
-* **Ссылка на [проект](https://github.com/TohaProger/SimpleTasks/releases/download/v1.0/default.rar)**
+* **Ссылка на [проект](https://github.com/TohaProger/SimpleTasks/releases/download/v4.49/SimpleTasks.rar)**
 * **Статус:** 4.49
 
 **Скриншоты рабочих окон приложения:**
