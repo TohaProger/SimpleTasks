@@ -22,7 +22,7 @@ class ProjectTest {
 
     @BeforeEach
     public void setup() throws SQLException, URISyntaxException, IOException {
-        HomeViewController.daoFactory= DAOFactory.getDAOFactory(2);
+        HomeViewController.daoFactory= DAOFactory.getDAOFactory("quelquechosedetrescomplique");
         project = new Project();
     }
 

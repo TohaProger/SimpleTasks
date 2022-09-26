@@ -43,7 +43,7 @@ public class RegisterController {
             alert.setTitle("Вы успешно зарегистрированы");
             alert.setContentText("Открываем страницу входа");
             alert.showAndWait();
-            HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа", 900, 600);
+            HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа");
         }
         else
         {
@@ -62,6 +62,6 @@ public class RegisterController {
      * @throws IOException исключение потока
      */
     public void onShowLogin(ActionEvent actionEvent) throws IOException, SQLException {
-        HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа", 900, 600);
+        HelloApplication.downloadScene("login-view.fxml", actionEvent, "Страница входа");
     }
 }

@@ -63,7 +63,7 @@ public class LoginController {
      * @throws IOException исключение потока для чтения данных
      */
     public void onShowRegister(ActionEvent actionEvent) throws IOException {
-        HelloApplication.downloadScene("register-view.fxml", actionEvent, "Страница регистрации", 900, 600);
+        HelloApplication.downloadScene("register-view.fxml", actionEvent, "Страница регистрации");
     }
 
     public static boolean isUserIn = true;
@@ -75,6 +75,6 @@ public class LoginController {
      */
     public void onGuest(ActionEvent actionEvent) throws IOException {
         isUserIn = false;
-        HelloApplication.downloadScene("project-list.fxml", actionEvent, "Только просмотр (гостевой вход)", 900, 600);
+        HelloApplication.downloadScene("project-list.fxml", actionEvent, "Только просмотр (гостевой вход)");
     }
 }

@@ -13,11 +13,11 @@ public class HomeViewController{
     public static DAOFactory daoFactory;
 
     public void onDataBase(ActionEvent event) throws IOException {
-        daoFactory = DAOFactory.getDAOFactory(2);
-        HelloApplication.downloadScene("login-view.fxml", event, "Страница входа", 900, 600);
+        daoFactory = DAOFactory.getDAOFactory("quelquechosedetrescomplique");
+        HelloApplication.downloadScene("login-view.fxml", event, "Страница входа");
     }
     public void onTxt(ActionEvent event) throws IOException  {
-        daoFactory = DAOFactory.getDAOFactory(1);
-        HelloApplication.downloadScene("login-view.fxml", event, "Страница входа", 900, 600);
+        daoFactory = DAOFactory.getDAOFactory("quelquechosedecomplique");
+        HelloApplication.downloadScene("login-view.fxml", event, "Страница входа");
     }
 }

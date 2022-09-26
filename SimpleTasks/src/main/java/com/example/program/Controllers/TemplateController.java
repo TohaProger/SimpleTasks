@@ -62,6 +62,7 @@ public class TemplateController implements Initializable {
 
     /**
      * Функция возвращения назад
+     * @param actionEvent
      * @throws IOException исключение потока
      */
     public void onBack(ActionEvent actionEvent) throws IOException, SQLException {
@@ -75,7 +76,7 @@ public class TemplateController implements Initializable {
             alert.setContentText("Выберете  требование");
             alert.showAndWait();
         }
-        HelloApplication.downloadScene("Main-view.fxml", actionEvent, "", 1486, 475);
+        HelloApplication.downloadScene("Main-view.fxml", actionEvent, "");
         
     }
 }

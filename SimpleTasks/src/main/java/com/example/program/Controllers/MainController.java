@@ -385,7 +385,7 @@ public class MainController implements Initializable {
      * @throws IOException исключение потока для чтения данных
      */
     public void onTamplate(ActionEvent actionEvent) throws IOException, SQLException {
-        HelloApplication.downloadScene("Themplate.fxml", actionEvent, "Страница шаблона", 900, 600);
+        HelloApplication.downloadScene("Themplate.fxml", actionEvent, "Страница шаблона");
     }
 
     public void selectSourceTab(MouseEvent mouseEvent) throws IOException {
