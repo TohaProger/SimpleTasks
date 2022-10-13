@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox id="Login" alignment="CENTER" prefHeight="400.0" prefWidth="600.0" spacing="20.0"
+      xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.program.Controllers.LoginController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
+    </padding>
+
+    <Label text="Введите логин">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </Label>
+    <TextField fx:id="LoginText" maxWidth="300.0" prefWidth="300.0"/>
+
+    <Label alignment="CENTER" text="Введите пароль" textAlignment="CENTER">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </Label>
+    <PasswordField fx:id="PasswordText" maxWidth="300.0"/>
+
+    <ComboBox fx:id="comboBox" prefHeight="26.0" prefWidth="141.0" promptText="Выберите способ" GridPane.columnIndex="1"
+              GridPane.rowIndex="3">
+    </ComboBox>
+
+
+    <Button onAction="#onLogin" text="Войти">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </Button>
+    <Hyperlink onAction="#onShowRegister" text="Нет данных - Регистрация" textFill="#151515">
+        <font>
+            <Font size="19.0"/>
+        </font>
+    </Hyperlink>
+    <Button onAction="#onGuest" text="Войти как гость (только просмотр)">
+        <font>
+            <Font size="20.0"/>
+        </font>
+    </Button>
+</VBox>
